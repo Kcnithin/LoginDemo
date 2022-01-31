@@ -4,7 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import 'otp.dart';
 
-enum SingingCharacter { keep }
+
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool _obscureText = true;
-  SingingCharacter? _character = SingingCharacter.keep;
+
   late final VoidCallback onPressed;
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import 'home.dart';
+
 class NewOtp extends StatefulWidget {
   late final String? phoneNumber = "8281212017";
 
@@ -54,7 +56,7 @@ class _NewOtpState extends State<NewOtp> {
         pre_backpress = DateTime.now();
         if (cantExit) {
           //show snackbar
-          final snack = SnackBar(
+          const snack = SnackBar(
             content: Text('Press Back button again to Exit'),
             duration: Duration(seconds: 2),
           );
@@ -66,6 +68,9 @@ class _NewOtpState extends State<NewOtp> {
         }
       },
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+        ),
         backgroundColor: Colors.black,
         body: SafeArea(
           child: GestureDetector(
@@ -75,15 +80,6 @@ class _NewOtpState extends State<NewOtp> {
               width: MediaQuery.of(context).size.width,
               child: ListView(
                 children: <Widget>[
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: Image.asset(
-                      "assets/back.png",
-                      width: 50,
-                      height: 50,
-                      color: Colors.white,
-                    ),
-                  ),
                   Container(
                     margin: const EdgeInsets.only(left: 20, top: 20),
                     child: const Text(
@@ -166,7 +162,7 @@ class _NewOtpState extends State<NewOtp> {
                     child: ButtonTheme(
                       height: 50,
                       child: TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           formKey.currentState!.validate();
                           // conditions for validating
                           if (currentText.length != 6 ||
@@ -179,6 +175,10 @@ class _NewOtpState extends State<NewOtp> {
                               () {
                                 hasError = false;
                                 snackBar("OTP Verified!!");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Home()));
                               },
                             );
                           }

@@ -37,7 +37,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    getSaved(context);
     bool? checkboxIconFormFieldValue = false;
     return WillPopScope(
       onWillPop: () async {
@@ -337,15 +336,5 @@ class _LoginState extends State<Login> {
             ),
           )),
     );
-  }
-
-  Future<void> getSaved(BuildContext context) async {
-    WidgetsFlutterBinding.ensureInitialized();
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final savedUsername = sharedPreferences.getString('username');
-    if (savedUsername != null) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => Home()));
-    }
   }
 }

@@ -7,6 +7,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'home.dart';
 
 class NewOtp extends StatefulWidget {
+
   late final String? phoneNumber = "8281212017";
 
   @override

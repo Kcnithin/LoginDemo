@@ -9,8 +9,8 @@ class AppBarWidgets extends StatelessWidget {
       {required this.buttonAction,
       required this.buttonIcon,
       this.iconColor = Colors
-          .black}) //to pass optional parameter..here black will be default and can change only if required
-  {}
+          .black}); //to pass optional parameter..here black will be default and can change only if required
+
 
   @override
   Widget build(BuildContext context) {

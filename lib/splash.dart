@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'home.dart';
 import 'login.dart';
 
 class Splash extends StatefulWidget {
@@ -10,9 +14,25 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+
+  bool flag = false;
   @override
   void initState() {
-    gotoLogin();
+    getSaved(context);
+    Timer(
+        const Duration(seconds: 3),
+            () => flag?Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Home(),
+          ),
+        ) : Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Login(),
+          ),
+        )
+    );
     super.initState();
   }
 
@@ -43,9 +63,14 @@ class _SplashState extends State<Splash> {
     super.dispose();
   }
 
-  Future<void> gotoLogin() async {
-    await Future.delayed(Duration(seconds: 5));
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => Login()));
+  Future<void> getSaved(BuildContext context) async {
+    WidgetsFlutterBinding.ensureInitialized();
+    final sharedPreferences = await SharedPreferences.getInstance();
+    final savedUsername = sharedPreferences.getString('username');
+    if (savedUsername != null) {
+     flag = true;
+    }else{
+      flag = false;
+    }
   }
 }
